@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Templo de la trifuerza</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="css/registrarse.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- //web font -->
+</head>
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>Templo de la trifuerza</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<!--form action="#" method="post"-->
+					<input class="text email" type="email" name="email" placeholder="Email" required="" id=mail>
+					<input class="text" type="password" name="password" placeholder="Password" required="">
+					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="" id=psw>
+                    <input id= "signup" type="submit" value="SIGN UP">
+				<!--/form-->
+				<p>Have an Account? <a href="login.html"> Login Now!</a></p>
+			</div>
+		</div>
+	</div>
+	<!-- //main -->
+	<!--Jquery script-->
+	<script>
+		$(document).ready(function(){
+			$("#signup").click(function(){
+				var mail1 = $('#mail').val();
+				var password1 = $('#psw').val();
+				var auth = {mail: mail1, password: password1};
+				var consulta="http://localhost:8080/dsaApp/users/registro";
+				//prueba
+				/*
+                $.post(consulta,JSON.stringify(auth), function(data, status){
+					alert("Status: " + status);
+				});*/
+                $.ajax({
+                    type: "POST",
+                    url: consulta,
+                    // The key needs to match your method's input parameter (case-sensitive).
+                    data: JSON.stringify(auth),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data){
+                        console.log("Entra en success", data);
+                        window.location.href = "main_page.html";
+                    },
+                    failure: function(errMsg) {
+                        alert(errMsg);
+                    }
+                });
+				
+			});
+		});
+	</script>
+</body>
+</html>
